@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tests>
+	<wrongEmail wrongEmail ="kaszalotek33" errorEmailMessage ="Invalid email address."/>
+	<wrongEmail wrongEmail ="" errorEmailMessage ="Invalid email address."/>
+	<wrongPassword wrongPassword =" " errorPasswordMessage ="Password is required."/>
+	<wrongPassword wrongPassword = "kicha" errorPasswordMessage ="Authentication failed."/>
+</tests>

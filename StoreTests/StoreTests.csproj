@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <OutputType>Library</OutputType>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="NPOI" Version="2.5.5" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+    <PackageReference Include="OcarambaLite" Version="4.0.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="96.0.4664.4500" />
+	</ItemGroup>
+	<ItemGroup>
+    <Compile Include="DataDriven\DataDrivenHelper.cs" />
+    <Compile Include="DataDriven\TestData.cs" />
+    <Compile Include="PageObjects\AuthenticationPage.cs" />
+    <Compile Include="PageObjects\CartPopupPage.cs" />
+    <Compile Include="PageObjects\CategoryPage.cs" />
+    <Compile Include="PageObjects\DummyPage.cs" />
+    <Compile Include="PageObjects\HomePage.cs" />
+    <Compile Include="PageObjects\ItemPage.cs" />
+    <Compile Include="PageObjects\MyAccountPage.cs" />
+    <Compile Include="PageObjects\OrderAddressPage.cs" />
+    <Compile Include="PageObjects\OrderPaymentPage.cs" />
+    <Compile Include="PageObjects\OrderShippingPage.cs" />
+    <Compile Include="PageObjects\OrderSummaryPage.cs" />
+    <Compile Include="PageObjects\RegistrationPage.cs" />
+    <Compile Include="Tests\BuyingTests.cs" />
+    <Compile Include="Tests\DummyTests.cs" />
+    <Compile Include="Tests\RegistrationAccountTests.cs" />
+    <Compile Include="ProjectBaseConfiguration.cs" />
+    <Compile Include="PageObjects\BasePage.cs" />
+    <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Tests\SignInTests.cs" />
+	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="appsettings.Linux.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="set_AppConfig_for_tests.ps1">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+ </Project>
