@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using StoreTests.PageObjects;
-
 using StoreTests;
 
 namespace Dummy.Tests
@@ -34,6 +33,16 @@ namespace Dummy.Tests
             dummy.SwitchToPreviousTab();
             dummy.CheckIfUserIsSwitchedToChosenTab("The Internet");
             dummy.TakeAndSaveScreenshot();
+        }
+        [Test]
+        public void LoadingTest()
+        {
+            var dummy = new DummyPage(DriverContext);
+
+            dummy.OpenDynamicLoadingPage();
+            dummy.ClickStartBtn();
+
+            dummy.CheckIfMessageIsVisible("Hello World!");
         }
     }
 }

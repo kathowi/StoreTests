@@ -2,6 +2,8 @@
 using Ocaramba;
 using Ocaramba.Extensions;
 using Ocaramba.Types;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 
@@ -15,8 +17,9 @@ namespace StoreTests.PageObjects
             boxB = new ElementLocator(Locator.Id, "column-b"),
             headerBoxA = new ElementLocator(Locator.CssSelector, "#column-a header"),
             headerBoxB = new ElementLocator(Locator.CssSelector, "#column-b header"),
-            clickHereLink = new ElementLocator(Locator.LinkText, "Click Here");
-  
+            clickHereLink = new ElementLocator(Locator.LinkText, "Click Here"),
+            startBtn = new ElementLocator(Locator.TagName, "button");
+
         public DummyPage(DriverContext driverContext) : base(driverContext)
         {
         }
@@ -30,6 +33,11 @@ namespace StoreTests.PageObjects
         {
             var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
             Driver.NavigateTo(new Uri(dummyWindowsUrl));
+        }
+        public void OpenDynamicLoadingPage()
+        {
+            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/1";
+            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
         }
         public void OpenNewTab()
         {
@@ -67,6 +75,17 @@ namespace StoreTests.PageObjects
                 Assert.AreEqual(expectedHeaderOfBoxA, actualHeaderOfBoxA);
                 Assert.AreEqual(expectedHeaderOfBoxB, actualHeaderOfBoxB);
             });
+        }
+        public void ClickStartBtn()
+        {
+            Driver.GetElement(startBtn).Click();
+        }
+        public void CheckIfMessageIsVisible(string expectedMessage)
+        {
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(300));
+            var actualMessage = wait.Until(d => d.FindElement(By.Id("finish")));
+
+            Assert.AreEqual(expectedMessage, actualMessage.Text);
         }
     }
 }
