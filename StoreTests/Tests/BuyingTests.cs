@@ -5,21 +5,29 @@ namespace StoreTests.Tests
 {
     public class BuyingTests : BaseTest
     {
-        public void AddingItemWithAttributesToCartTest()
+        [SetUp]
+        public void BeforeEach()
         {
             var authentication = new AuthenticationPage(DriverContext);
+            authentication.SignIn();
+        }
+
+        [Test]
+        public void AddingItemWithAttributesToCartTest()
+        {
             var home = new HomePage(DriverContext);
             var category = new CategoryPage(DriverContext);
             var item = new ItemPage(DriverContext);
             var cartPopup = new CartPopupPage(DriverContext);
 
+            string categoryName = "Women";
+            string itemName = "Faded Short Sleeve T-shirts";
             string quantity = "4";
             string size = "M";
             string color = "Blue";
 
-            authentication.SignIn();
-            home.GoToCategory("Women");
-            category.ClickItem("Faded Short Sleeve T-shirts");
+            home.GoToCategory(categoryName);
+            category.ClickItem(itemName);
             item.ChangeQuantity(quantity);
             item.ChangeSize(size);
             item.ChangeColor(color);
@@ -29,14 +37,11 @@ namespace StoreTests.Tests
             cartPopup.CheckIfSelectedQuantityIsVisible(quantity);
             cartPopup.CheckIfSelectedColorAndSizeAreVisible(color, size);
             cartPopup.CheckIfPriceIsProperlyCalculatedWithGivenQuantity(quantity);
-
-            authentication.ClickSignOut();
         }
 
         [Test]
         public void BuyingItemTest()
         {
-            var authentication = new AuthenticationPage(DriverContext);
             var home = new HomePage(DriverContext);
             var category = new CategoryPage(DriverContext);
             var item = new ItemPage(DriverContext);
@@ -46,22 +51,69 @@ namespace StoreTests.Tests
             var orderShipping = new OrderShippingPage(DriverContext);
             var orderPayment = new OrderPaymentPage(DriverContext);
 
-            authentication.SignIn();
-            home.GoToCategory("Women");
-            category.ClickItem("Printed Dress");
+            string categoryName = "Women";
+            string itemName = "Printed Dress";
+            string name = "Jan Kowalski";
+            string totalPrice = "28.00";
+            string address = "Onion";
+            string address2 = "Los Angeles, California 00000";
+            string country = "United States";
+
+            home.GoToCategory(categoryName);
+            category.ClickItem(itemName);
             item.ClickAddToCart();
             cartPopup.CheckIfCartIsVisible();
             cartPopup.ClickProceedToCheckout();
+            orderSummary.CheckTotalPrice(totalPrice);
             orderSummary.ClickProceedToCheckout();
+            orderAddress.CheckIfDeliveryAddressIsCorrect(name, address, address2, country);
             orderAddress.ClickProceedToCheckout();
             orderShipping.SelectTermsOfService();
             orderShipping.ClickProceedToCheckout();
+            orderPayment.CheckTotalPrice(totalPrice);
             orderPayment.ClickPayByCheck();
             orderPayment.ClickConfirmMyOrder();
 
             orderPayment.CheckIfSuccessMessageIsVisible("Your order on My Store is complete.");
+        }
 
-            authentication.ClickSignOut();
+        [Test]
+        public void BuyingItemWithDiscountTest()
+        {
+            var home = new HomePage(DriverContext);
+            var category = new CategoryPage(DriverContext);
+            var item = new ItemPage(DriverContext);
+            var cartPopup = new CartPopupPage(DriverContext);
+            var orderSummary = new OrderSummaryPage(DriverContext);
+            var orderAddress = new OrderAddressPage(DriverContext);
+            var orderShipping = new OrderShippingPage(DriverContext);
+            var orderPayment = new OrderPaymentPage(DriverContext);
+
+            string categoryName = "Women";
+            string itemName = "Printed Summer Dress";
+            string reductionPercent = "-5%";
+            string oldPrice = "30.51";
+            string newPrice = "28.98";
+            string totalPrice = "30.98";
+
+            home.GoToCategory(categoryName);
+            category.ClickItem(itemName);
+            item.CheckOldPrice(oldPrice);
+            item.CheckReductionPercent(reductionPercent);
+            item.CheckNewPrice(newPrice);
+            item.ClickAddToCart();
+            cartPopup.CheckIfCartIsVisible();
+            cartPopup.ClickProceedToCheckout();
+            orderSummary.CheckTotalPrice(totalPrice);
+            orderSummary.ClickProceedToCheckout();
+            orderAddress.ClickProceedToCheckout();
+            orderShipping.SelectTermsOfService();
+            orderShipping.ClickProceedToCheckout();
+            orderPayment.CheckTotalPrice(totalPrice);
+            orderPayment.ClickPayByCheck();
+            orderPayment.ClickConfirmMyOrder();
+
+            orderPayment.CheckIfSuccessMessageIsVisible("Your order on My Store is complete.");
         }
     }
 }

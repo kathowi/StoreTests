@@ -7,6 +7,13 @@ namespace StoreTests.Tests
 {
     public class SignInTests : BaseTest
     {
+        [SetUp]
+        public void BeforeEach()
+        {
+            var authentication = new AuthenticationPage(DriverContext);
+            authentication.OpenSignInPage();
+        }
+
         // test case using data from external file xml
         [Test]
         [TestCaseSource(typeof(TestData), "WrongPassword")]
@@ -16,7 +23,6 @@ namespace StoreTests.Tests
 
             string correctEmail = "kaszalotek33@gmail.com";
 
-            authentication.OpenSignInPage();
             authentication.CheckIfHeaderIsVisible("AUTHENTICATION");
             authentication.SetEmailToSignIn(correctEmail);
             authentication.SetPassword(parameters["wrongPassword"]);
@@ -32,7 +38,6 @@ namespace StoreTests.Tests
             var authentication = new AuthenticationPage(DriverContext);
             var myAccount = new MyAccountPage(DriverContext);
 
-            authentication.OpenSignInPage();
             authentication.CheckIfHeaderIsVisible("AUTHENTICATION");
             authentication.SetEmailToSignIn(ProjectBaseConfiguration.User);
             authentication.SetPassword(ProjectBaseConfiguration.Password);

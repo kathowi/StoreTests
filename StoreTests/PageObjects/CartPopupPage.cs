@@ -13,6 +13,7 @@ namespace StoreTests.PageObjects
             productAddedToCartMessage = new ElementLocator(Locator.CssSelector, ".layer_cart_product h2"),
             quantityInfo = new ElementLocator(Locator.Id, "layer_cart_product_quantity"),
             attributesInfo = new ElementLocator(Locator.Id, "layer_cart_product_attributes"),
+            totalProductPrice = new ElementLocator(Locator.Id, "layer_cart_product_price"),
             continueShoppingBtn = new ElementLocator(Locator.CssSelector, ".continue"),
             proceedCheckoutBtn = new ElementLocator(Locator.CssSelector, "a[title='Proceed to checkout']");
 
@@ -24,13 +25,11 @@ namespace StoreTests.PageObjects
         {
             Driver.IsElementPresent(cartPopup, 4);
         }
-
         public void CheckIfSuccessMessageIsVisible(string expectedMessage)
         {
             var actualMessage = Driver.GetElement(productAddedToCartMessage).Text;
             Assert.AreEqual(expectedMessage, actualMessage);
         }
-
         public void CheckIfSelectedQuantityIsVisible(string expectedQuantity)
         {
             var actualQuantity = Driver.GetElement(quantityInfo).Text;
@@ -39,21 +38,28 @@ namespace StoreTests.PageObjects
         public void CheckIfSelectedColorAndSizeAreVisible(string expectedSize, string expectedColor)
         {
             var actualAttributes = Driver.GetElement(attributesInfo).Text;
-            Assert.IsTrue(actualAttributes.Contains(expectedSize));
-            Assert.IsTrue(actualAttributes.Contains(expectedColor));
+ 
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(actualAttributes.Contains(expectedSize));
+                Assert.IsTrue(actualAttributes.Contains(expectedColor));
+            });
         }
-        public double CheckIfPriceIsProperlyCalculatedWithGivenQuantity(string quantity)
+        public void CheckIfPriceIsProperlyCalculatedWithGivenQuantity(string quantity)
         {
             var item = new ItemPage(DriverContext);
             var price = item.GetPrice();
             var quantityNumber = Convert.ToInt32(quantity, 16);
-            return quantityNumber * price;
+            var expectedTotalProductPrice = quantityNumber * price;
+            var actualTotalProductPrice  = Driver.GetElement(totalProductPrice).Text.Split('$');
+            var actualTotalProductPriceAsNumber = ConvertStringToDouble(actualTotalProductPrice[1]);
+
+            Assert.AreEqual(expectedTotalProductPrice, actualTotalProductPriceAsNumber);
         }
         public void ClickContinueShopping()
         {
             Driver.GetElement(continueShoppingBtn).Click();
         }
-
         public void ClickProceedToCheckout()
         {
             Driver.GetElement(proceedCheckoutBtn).Click();

@@ -29,8 +29,7 @@ namespace StoreTests.PageObjects
         public void CheckIfUserIsLoggedOut()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Checking if user is logged out");
-            Assert.IsTrue(Driver.GetElement(linkSignIn).Displayed);            
+            Assert.IsTrue(Driver.GetElement(linkSignIn).Displayed);
         }
     }
 }
-

@@ -31,12 +31,10 @@ namespace StoreTests.PageObjects
             var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
             Driver.NavigateTo(new Uri(dummyWindowsUrl));
         }
-
         public void OpenNewTab()
         {
             Driver.GetElement(clickHereLink).Click();
         }
-
         public void DragBoxAAndDropToBoxB()
         {
             var element = Driver.GetElement(boxA);
@@ -52,14 +50,11 @@ namespace StoreTests.PageObjects
         {
             Driver.SwitchTo().Window(Driver.WindowHandles.First());
         }
-
         public void CheckIfUserIsSwitchedToChosenTab(string expectedPageTitle)
         {
             var actualPageTitle = Driver.Title;
-
             Assert.AreEqual(expectedPageTitle,actualPageTitle);
         }
-
         public void CheckIfBoxAWasSwitchedWithBoxB()
         {
             var expectedHeaderOfBoxA = "B";
@@ -67,8 +62,11 @@ namespace StoreTests.PageObjects
             var actualHeaderOfBoxA = Driver.GetElement(headerBoxA).Text;
             var actualHeaderOfBoxB = Driver.GetElement(headerBoxB).Text;
 
-            Assert.AreEqual(expectedHeaderOfBoxA, actualHeaderOfBoxA);
-            Assert.AreEqual(expectedHeaderOfBoxB, actualHeaderOfBoxB);
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expectedHeaderOfBoxA, actualHeaderOfBoxA);
+                Assert.AreEqual(expectedHeaderOfBoxB, actualHeaderOfBoxB);
+            });
         }
     }
 }

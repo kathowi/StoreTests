@@ -1,4 +1,5 @@
-﻿using Ocaramba;
+﻿using NUnit.Framework;
+using Ocaramba;
 using Ocaramba.Extensions;
 using Ocaramba.Types;
 using OpenQA.Selenium;
@@ -11,17 +12,35 @@ namespace StoreTests.PageObjects
         private readonly ElementLocator
             addToCartBtn = new ElementLocator(Locator.XPath, "//span[contains(text(),'Add to cart')]"),
             quantityInput = new ElementLocator(Locator.Id, "quantity_wanted"),
+            oldPriceInfo = new ElementLocator(Locator.Id, "old_price_display"),
+            reductionPercentInfo = new ElementLocator(Locator.Id, "reduction_percent_display"),
             priceInfo = new ElementLocator(Locator.Id, "our_price_display");
         private IWebElement sizeDropdown => Driver.FindElement(By.Id("group_1"));
 
         public ItemPage(DriverContext driverContext) : base(driverContext)
         {
         }
+
+        public void CheckOldPrice(string expectedOldPrice)
+        {
+            var oldPrice = Driver.GetElement(oldPriceInfo).Text;
+            Assert.AreEqual(expectedOldPrice, oldPrice);
+        }
+        public void CheckReductionPercent(string expectedReductionPercent)
+        {
+            var reductionPercent = Driver.GetElement(reductionPercentInfo).Text;
+            Assert.AreEqual(expectedReductionPercent, reductionPercent);
+        }
+        public void CheckNewPrice(string expectedNewPrice)
+        {
+            var price = Driver.GetElement(priceInfo).Text.Split('$');
+            var priceWithoutCurrency = price[1];
+            Assert.AreEqual(expectedNewPrice, priceWithoutCurrency);
+        }
         public void ClickAddToCart()
         {
             Driver.GetElement(addToCartBtn).Click();
         }
-
         public void ChangeQuantity(string quantity)
         {
             Driver.GetElement(quantityInput).Clear();
@@ -32,7 +51,6 @@ namespace StoreTests.PageObjects
             SelectElement select = new SelectElement(sizeDropdown);
             select.SelectByText(size);
         }
-
         public void ChangeColor(string color)
         {
             Driver.GetElement(new ElementLocator(Locator.CssSelector, $"a[title = '{color}'")).Click();
@@ -45,4 +63,3 @@ namespace StoreTests.PageObjects
         }
     }
 }
-

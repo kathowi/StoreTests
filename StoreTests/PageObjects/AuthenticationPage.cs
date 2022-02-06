@@ -26,17 +26,14 @@ namespace StoreTests.PageObjects
         {
             Driver.GetElement(linkSignIn).Click();
         }
-
         public void SetEmailToCreateAccount(string email)
         {
             Driver.GetElement(emailCreateAccountInput).SendKeys(email);
         }
-
         public void ClickCreateAccountBtn()
         {
             Driver.GetElement(createAnAccountBtn).Click();
         }
-
         public void CheckIfErrorMessageIsVisibleForRegistration(string expectedErrorMessage)
         {
             var actualErrorMessage = Driver.GetElement(invalidEmailErrorMessageForRegistration).Text;
@@ -47,29 +44,24 @@ namespace StoreTests.PageObjects
             var actualErrorMessage = Driver.GetElement(invalidErrorMessageForSignIn).Text;
             Assert.IsTrue(actualErrorMessage.Contains(expectedErrorMessage));
         }
-
         public void SetEmailToSignIn(string email)
         {
             Driver.GetElement(emailRegisteredAccountInput).SendKeys(email);
         }
-
         public void SetPassword(string password)
         {
             Driver.GetElement(passwordInput).SendKeys(password);
         }
-
         public void ClickSignInBtn()
         { 
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            IWebElement signInBtn = Driver.FindElement(By.Id("SubmitLogin"));	
+            IWebElement signInBtn = Driver.FindElement(By.Id("SubmitLogin"));
             js.ExecuteScript("arguments[0].click();", signInBtn);
         }
-
         public void ClickSignOut()
         {
             Driver.GetElement(linkSignOut).Click();
         }
-
         public void SignIn()
         {
             OpenSignInPage();

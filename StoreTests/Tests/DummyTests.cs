@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using StoreTests.PageObjects;
-using System.Threading;
 
 using StoreTests;
 

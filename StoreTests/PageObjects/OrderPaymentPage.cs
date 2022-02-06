@@ -8,6 +8,7 @@ namespace StoreTests.PageObjects
     public class OrderPaymentPage : BasePage
     {
         private readonly ElementLocator
+            totalPrice = new ElementLocator(Locator.Id, "total_price"),
             payByCheckBtn = new ElementLocator(Locator.ClassName, "cheque"),
             confirmOrderBtn = new ElementLocator(Locator.CssSelector, "p.cart_navigation button"),
             successOrderMessage = new ElementLocator(Locator.ClassName, "alert-success");
@@ -16,6 +17,13 @@ namespace StoreTests.PageObjects
         {
         }
 
+        public void CheckTotalPrice(string expectedTotalPrice)
+        {
+            var actualTotalPrice = Driver.GetElement(totalPrice).Text.Split('$');
+            var actualTotalPriceAsNumber = actualTotalPrice[1];
+
+            Assert.AreEqual(expectedTotalPrice, actualTotalPriceAsNumber);
+        }
         public void ClickPayByCheck()
         {
             Driver.GetElement(payByCheckBtn).Click();
@@ -24,7 +32,6 @@ namespace StoreTests.PageObjects
         {
             Driver.GetElement(confirmOrderBtn).Click();
         }
-
         public void CheckIfSuccessMessageIsVisible(string expectedMessage)
         {
             var actualMessage = Driver.GetElement(successOrderMessage).Text;

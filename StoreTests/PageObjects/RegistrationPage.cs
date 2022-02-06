@@ -92,13 +92,11 @@ namespace StoreTests.PageObjects
         {
             Checkbox checkbox = new Checkbox(newsletterCheckbox);
             checkbox.TickCheckbox();
-            //Driver.GetElement(newsletterCheckbox).Click();
         }
         public void SelectSpecialOffersCheckbox()
         {
             Checkbox checkbox = new Checkbox(specialOffersCheckbox);
             checkbox.TickCheckbox();
-            //Driver.GetElement(specialOffersCheckbox).Click();
         } 
         public void SetCompany(string company)
         {
@@ -146,8 +144,7 @@ namespace StoreTests.PageObjects
         public void ClickRegisterBtn()
         {
             Driver.GetElement(registerBtn).Click();
-        }
- 
+        } 
         public void FillInAddressInformation(
             string company,
             string address,

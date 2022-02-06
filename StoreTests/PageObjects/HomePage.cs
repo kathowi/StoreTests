@@ -19,7 +19,6 @@ namespace StoreTests.PageObjects
             var category = new ElementLocator(Locator.CssSelector, $"a[title='{categoryName}']");
             Driver.GetElement(category).Click();
         }
-
         public void DragLogoAndDropToSearchField()
         {
             var element = Driver.GetElement(logo);

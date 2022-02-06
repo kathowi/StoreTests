@@ -40,7 +40,6 @@ namespace StoreTests
             var pageHeader = new ElementLocator(Locator.CssSelector, $".page-heading[text()='{header}']");
             Driver.IsElementPresent(pageHeader, 4);
         }
-
         public double ConvertStringToDouble(string String)
         {
             CultureInfo usCulture = new CultureInfo("en-US");
