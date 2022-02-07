@@ -20,6 +20,8 @@ namespace StoreTests.PageObjects
             clickHereLink = new ElementLocator(Locator.LinkText, "Click Here"),
             startBtn = new ElementLocator(Locator.TagName, "button");
 
+        private By finish => By.CssSelector("#finish");
+
         public DummyPage(DriverContext driverContext) : base(driverContext)
         {
         }
@@ -82,10 +84,11 @@ namespace StoreTests.PageObjects
         }
         public void CheckIfMessageIsVisible(string expectedMessage)
         {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(300));
-            var actualMessage = wait.Until(d => d.FindElement(By.Id("finish")));
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+            wait.Until(d => d.FindElement(By.CssSelector("#finish")).Displayed);
+            var actualMessage = Driver.FindElement(finish).Text;
 
-            Assert.AreEqual(expectedMessage, actualMessage.Text);
+            Assert.AreEqual(expectedMessage, actualMessage);
         }
     }
 }
