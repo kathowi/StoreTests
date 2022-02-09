@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Ocaramba;
 using Ocaramba.Extensions;
 using Ocaramba.Types;
-using System;
 using System.Globalization;
 
 namespace StoreTests.PageObjects

@@ -36,9 +36,14 @@ namespace StoreTests.PageObjects
             var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
             Driver.NavigateTo(new Uri(dummyWindowsUrl));
         }
-        public void OpenDynamicLoadingPage()
+        public void OpenDynamicLoadingPage1()
         {
             var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/1";
+            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
+        }
+        public void OpenDynamicLoadingPage2()
+        {
+            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/2";
             Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
         }
         public void OpenNewTab()
@@ -86,6 +91,14 @@ namespace StoreTests.PageObjects
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
             wait.Until(d => d.FindElement(By.CssSelector("#finish")).Displayed);
+            var actualMessage = Driver.FindElement(finish).Text;
+
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+
+        public void CheckIfMessageIsVisibleWithTimeout(string expectedMessage)
+        {
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             var actualMessage = Driver.FindElement(finish).Text;
 
             Assert.AreEqual(expectedMessage, actualMessage);

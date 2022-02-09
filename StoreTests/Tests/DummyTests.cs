@@ -34,15 +34,28 @@ namespace Dummy.Tests
             dummy.CheckIfUserIsSwitchedToChosenTab("The Internet");
             dummy.TakeAndSaveScreenshot();
         }
+
         [Test]
-        public void LoadingTest()
+        public void LoadingTestWithExplicitWait()
         {
             var dummy = new DummyPage(DriverContext);
 
-            dummy.OpenDynamicLoadingPage();
+            dummy.OpenDynamicLoadingPage1();
             dummy.ClickStartBtn();
 
             dummy.CheckIfMessageIsVisible("Hello World!");
         }
+
+        [Test]
+        public void LoadingTestWithImplicitWait()
+        {
+            var dummy = new DummyPage(DriverContext);
+
+            dummy.OpenDynamicLoadingPage2();
+            dummy.ClickStartBtn();
+
+            dummy.CheckIfMessageIsVisibleWithTimeout("Hello World!");
+        }
+
     }
 }
