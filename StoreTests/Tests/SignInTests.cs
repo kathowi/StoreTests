@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace StoreTests.Tests
 {
+    [TestFixture]
     public class SignInTests : BaseTest
     {
         [SetUp]

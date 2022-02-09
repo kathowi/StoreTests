@@ -4,6 +4,7 @@ using StoreTests;
 
 namespace Dummy.Tests
 {
+    [TestFixture]
     public class DummyTests : BaseTest
     {
 

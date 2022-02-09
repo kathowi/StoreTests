@@ -69,5 +69,9 @@ namespace StoreTests.PageObjects
             SetPassword(ProjectBaseConfiguration.Password);
             ClickSignInBtn();
         }
+        public void LogOut()
+        {
+            Driver.Navigate().GoToUrl("http://automationpractice.com/index.php?mylogout=");
+        }
     }
 }

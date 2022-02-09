@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace StoreTests
 {
+    [TestFixture]
     public class RegistrationAccountTests : BaseTest
     {
         // test case using data from external file xml

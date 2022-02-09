@@ -3,6 +3,7 @@ using StoreTests.PageObjects;
 
 namespace StoreTests.Tests
 {
+    [TestFixture]
     public class BuyingTests : BaseTest
     {
         [SetUp]
@@ -19,13 +20,14 @@ namespace StoreTests.Tests
             var category = new CategoryPage(DriverContext);
             var item = new ItemPage(DriverContext);
             var cartPopup = new CartPopupPage(DriverContext);
+            var authentication = new AuthenticationPage(DriverContext);
 
             string categoryName = "Women";
             string itemName = "Faded Short Sleeve T-shirts";
             string quantity = "4";
             string size = "M";
             string color = "Blue";
-
+   
             home.GoToCategory(categoryName);
             category.ClickItem(itemName);
             item.ChangeQuantity(quantity);
@@ -37,6 +39,8 @@ namespace StoreTests.Tests
             cartPopup.CheckIfSelectedQuantityIsVisible(quantity);
             cartPopup.CheckIfSelectedColorAndSizeAreVisible(color, size);
             cartPopup.CheckIfPriceIsProperlyCalculatedWithGivenQuantity(quantity);
+
+            authentication.LogOut();
         }
 
         [Test]
@@ -50,6 +54,7 @@ namespace StoreTests.Tests
             var orderAddress = new OrderAddressPage(DriverContext);
             var orderShipping = new OrderShippingPage(DriverContext);
             var orderPayment = new OrderPaymentPage(DriverContext);
+            var authentication = new AuthenticationPage(DriverContext);
 
             string categoryName = "Women";
             string itemName = "Printed Dress";
@@ -75,6 +80,8 @@ namespace StoreTests.Tests
             orderPayment.ClickConfirmMyOrder();
 
             orderPayment.CheckIfSuccessMessageIsVisible("Your order on My Store is complete.");
+
+            authentication.LogOut();
         }
 
         [Test]
@@ -88,11 +95,12 @@ namespace StoreTests.Tests
             var orderAddress = new OrderAddressPage(DriverContext);
             var orderShipping = new OrderShippingPage(DriverContext);
             var orderPayment = new OrderPaymentPage(DriverContext);
+            var authentication = new AuthenticationPage(DriverContext);
 
             string categoryName = "Women";
             string itemName = "Printed Summer Dress";
             string reductionPercent = "-5%";
-            string oldPrice = "30.51";
+            string oldPrice = "$30.51";
             string newPrice = "28.98";
             string totalPrice = "30.98";
 
@@ -114,6 +122,8 @@ namespace StoreTests.Tests
             orderPayment.ClickConfirmMyOrder();
 
             orderPayment.CheckIfSuccessMessageIsVisible("Your order on My Store is complete.");
+
+            authentication.LogOut();
         }
     }
 }
