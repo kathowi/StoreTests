@@ -11,20 +11,16 @@ namespace StoreTests.PageObjects
         }
 
         private readonly ElementLocator
-            logo = new ElementLocator(Locator.XPath, "//a[@title='My Store']"),
-            searchField = new ElementLocator(Locator.Id, "search_query_top");
+            categories = new ElementLocator(Locator.ClassName, "cat-title");
 
+        public void ClickCategories()
+        {
+            Driver.GetElement(categories).Click();
+        }
         public void GoToCategory(string categoryName)
         {
             var category = new ElementLocator(Locator.CssSelector, $"a[title='{categoryName}']");
             Driver.GetElement(category).Click();
-        }
-        public void DragLogoAndDropToSearchField()
-        {
-            var element = Driver.GetElement(logo);
-            var destination = Driver.GetElement(searchField);
-
-            Driver.DragAndDropJs(element, destination);
         }
     }
 }

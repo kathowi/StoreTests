@@ -35,7 +35,6 @@ namespace StoreTests
         {
             DriverContext.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             DriverContext.Start();
-            DriverContext.WindowMaximize();
         }
 
         [OneTimeTearDown]

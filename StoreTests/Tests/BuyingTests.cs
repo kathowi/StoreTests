@@ -27,7 +27,8 @@ namespace StoreTests.Tests
             string quantity = "4";
             string size = "M";
             string color = "Blue";
-   
+
+            home.ClickCategories();
             home.GoToCategory(categoryName);
             category.ClickItem(itemName);
             item.ChangeQuantity(quantity);
@@ -64,6 +65,7 @@ namespace StoreTests.Tests
             string address2 = "Los Angeles, California 00000";
             string country = "United States";
 
+            home.ClickCategories();
             home.GoToCategory(categoryName);
             category.ClickItem(itemName);
             item.ClickAddToCart();
@@ -104,6 +106,7 @@ namespace StoreTests.Tests
             string newPrice = "28.98";
             string totalPrice = "30.98";
 
+            home.ClickCategories();
             home.GoToCategory(categoryName);
             category.ClickItem(itemName);
             item.CheckOldPrice(oldPrice);
