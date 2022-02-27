@@ -32,7 +32,11 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- task: PublishTestResults@2
+- task: VSTest@2
   inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
