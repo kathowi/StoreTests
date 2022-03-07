@@ -22,6 +22,7 @@ namespace StoreTests.PageObjects
  
             Assert.AreEqual(expectedTotalPrice, actualTotalPriceAsNumber); 
         }
+
         public void ClickProceedToCheckout()
         {
             Driver.GetElement(proceedToCheckoutBtn).Click();

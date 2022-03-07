@@ -16,10 +16,7 @@ namespace StoreTests.Tests
         [Test]
         public void AddingItemWithAttributesToCartTest()
         {
-            var home = new HomePage(DriverContext);
-            var category = new CategoryPage(DriverContext);
-            var item = new ItemPage(DriverContext);
-            var cartPopup = new CartPopupPage(DriverContext);
+            var homePage = new HomePage(DriverContext);
             var authentication = new AuthenticationPage(DriverContext);
 
             string categoryName = "Women";
@@ -28,13 +25,18 @@ namespace StoreTests.Tests
             string size = "M";
             string color = "Blue";
 
-            home.ClickCategories();
-            home.GoToCategory(categoryName);
-            category.ClickItem(itemName);
-            item.ChangeQuantity(quantity);
-            item.ChangeSize(size);
-            item.ChangeColor(color);
-            item.ClickAddToCart();
+            var categoryPage = homePage
+                .ClickCategories()
+                .GoToCategory(categoryName);
+
+            var itemPage = categoryPage
+                .ClickItem(itemName);
+
+            var cartPopup = itemPage
+                .ChangeQuantity(quantity)
+                .ChangeSize(size)
+                .ChangeColor(color)
+                .ClickAddToCart();
 
             cartPopup.CheckIfSuccessMessageIsVisible("Product successfully added to your shopping cart");
             cartPopup.CheckIfSelectedQuantityIsVisible(quantity);

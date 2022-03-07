@@ -11,16 +11,19 @@ namespace StoreTests.PageObjects
         }
 
         private readonly ElementLocator
-            categories = new ElementLocator(Locator.ClassName, "cat-title");
+            categories = new ElementLocator(Locator.ClassName, "cat-title"),
+            category = new ElementLocator(Locator.CssSelector, "a[title='{0}']");
 
-        public void ClickCategories()
+        public HomePage ClickCategories()
         {
             Driver.GetElement(categories).Click();
+            return this;
         }
-        public void GoToCategory(string categoryName)
+
+        public CategoryPage GoToCategory(string categoryName)
         {
-            var category = new ElementLocator(Locator.CssSelector, $"a[title='{categoryName}']");
-            Driver.GetElement(category).Click();
+            Driver.GetElement(category.Format(categoryName)).Click();
+            return new CategoryPage(DriverContext);
         }
     }
 }

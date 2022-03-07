@@ -6,13 +6,17 @@ namespace StoreTests.PageObjects
 {
     public class CategoryPage : BasePage
     {
+        private readonly ElementLocator
+            itemLocator = new ElementLocator(Locator.CssSelector, ".product-name[title='{0}'");
+
         public CategoryPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
-        public void ClickItem(string itemName)
+        public ItemPage ClickItem(string itemName)
         {
-            Driver.GetElement(new ElementLocator(Locator.CssSelector, $".product-name[title='{itemName}'")).Click();
+            Driver.GetElement(itemLocator.Format(itemName)).Click();
+            return new ItemPage(DriverContext);
         }
     }
 }

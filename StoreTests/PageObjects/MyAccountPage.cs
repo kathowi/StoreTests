@@ -25,6 +25,7 @@ namespace StoreTests.PageObjects
             var actualLoggedUser = Driver.GetElement(loggedUser).Text;
             Assert.AreEqual(expectedLoggedUser, actualLoggedUser);
         }
+
         public void CheckIfUserIsLoggedOut()
         {
             Logger.Info(CultureInfo.CurrentCulture, "Checking if user is logged out");

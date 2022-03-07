@@ -9,6 +9,9 @@ namespace StoreTests
 {
     public partial class BasePage
     {
+        private readonly ElementLocator
+            pageHeader = new ElementLocator(Locator.CssSelector, ".page-heading[text()='{0}']");
+
         public BasePage(DriverContext driverContext)
         {
             DriverContext = driverContext;
@@ -24,22 +27,22 @@ namespace StoreTests
             var url = BaseConfiguration.GetUrlValue;
             Driver.NavigateTo(new Uri(url));
         }
+
         public void OpenSignInPage()
         {
-            var signInPage = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-            Driver.NavigateTo(new Uri(signInPage));
+            Driver.NavigateTo(new Uri(Url.SignIn));
         }
+
         public string GetTimestamp()
         {
-            DateTime dt = DateTime.Now;
-            string timestamp = dt.ToString("yyyyMMddHHmmss");
-            return timestamp;
+            return $"{DateTime.Now:yyyyMMddHHmmss}";
         }
+
         public void CheckIfHeaderIsVisible(string header)
         {
-            var pageHeader = new ElementLocator(Locator.CssSelector, $".page-heading[text()='{header}']");
-            Driver.IsElementPresent(pageHeader, 4);
+            Driver.IsElementPresent(pageHeader.Format(header), 4);
         }
+
         public double ConvertStringToDouble(string String)
         {
             CultureInfo usCulture = new CultureInfo("en-US");

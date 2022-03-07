@@ -29,6 +29,7 @@ namespace StoreTests.PageObjects
 
             Assert.AreEqual(expectedDeliveryAddress, actualADeliveryAddress);
         }
+
         public void ClickProceedToCheckout()
         {
             Driver.GetElement(proceedToCheckoutBtn).Click();

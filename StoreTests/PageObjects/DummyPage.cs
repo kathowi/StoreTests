@@ -20,7 +20,7 @@ namespace StoreTests.PageObjects
             clickHereLink = new ElementLocator(Locator.LinkText, "Click Here"),
             startBtn = new ElementLocator(Locator.TagName, "button");
 
-        private By finish => By.CssSelector("#finish");
+        private By Finish => By.CssSelector("#finish");
 
         public DummyPage(DriverContext driverContext) : base(driverContext)
         {
@@ -28,28 +28,29 @@ namespace StoreTests.PageObjects
 
         public void OpenDragAndDropPage()
         {
-            var dummyDragAndDropUrl = "https://the-internet.herokuapp.com/drag_and_drop";
-            Driver.NavigateTo(new Uri(dummyDragAndDropUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDragAndDropUrl));
         }
+
         public void OpenWindowsPage()
         {
-            var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
-            Driver.NavigateTo(new Uri(dummyWindowsUrl));
+            Driver.NavigateTo(new Uri(Url.DummyWindowsUrl));
         }
+
         public void OpenDynamicLoadingPage1()
         {
-            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/1";
-            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDynamicLoadingUrl1));
         }
+
         public void OpenDynamicLoadingPage2()
         {
-            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/2";
-            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDynamicLoadingUrl2));
         }
+
         public void OpenNewTab()
         {
             Driver.GetElement(clickHereLink).Click();
         }
+
         public void DragBoxAAndDropToBoxB()
         {
             var element = Driver.GetElement(boxA);
@@ -57,19 +58,23 @@ namespace StoreTests.PageObjects
 
             Driver.DragAndDropJs(element, destination);
         }
+
         public void SwitchToNewTab()
         {
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
         }
+
         public void SwitchToPreviousTab()
         {
             Driver.SwitchTo().Window(Driver.WindowHandles.First());
         }
+
         public void CheckIfUserIsSwitchedToChosenTab(string expectedPageTitle)
         {
             var actualPageTitle = Driver.Title;
             Assert.AreEqual(expectedPageTitle,actualPageTitle);
         }
+
         public void CheckIfBoxAWasSwitchedWithBoxB()
         {
             var expectedHeaderOfBoxA = "B";
@@ -83,15 +88,17 @@ namespace StoreTests.PageObjects
                 Assert.AreEqual(expectedHeaderOfBoxB, actualHeaderOfBoxB);
             });
         }
+
         public void ClickStartBtn()
         {
             Driver.GetElement(startBtn).Click();
         }
+
         public void CheckIfMessageIsVisible(string expectedMessage)
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
             wait.Until(d => d.FindElement(By.CssSelector("#finish")).Displayed);
-            var actualMessage = Driver.FindElement(finish).Text;
+            var actualMessage = Driver.FindElement(Finish).Text;
 
             Assert.AreEqual(expectedMessage, actualMessage);
         }
@@ -99,7 +106,7 @@ namespace StoreTests.PageObjects
         public void CheckIfMessageIsVisibleWithTimeout(string expectedMessage)
         {
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
-            var actualMessage = Driver.FindElement(finish).Text;
+            var actualMessage = Driver.FindElement(Finish).Text;
 
             Assert.AreEqual(expectedMessage, actualMessage);
         }

@@ -10,12 +10,12 @@ namespace StoreTests.PageObjects
     public class RegistrationPage : BasePage
     {
         private readonly ElementLocator
-            //mrRadioBtn = new ElementLocator(Locator.Id, "id_gender1"),
-            //mrsRadioBtn = new ElementLocator(Locator.Id, "id_gender2"),
+            mrRadioBtn = new ElementLocator(Locator.Id, "id_gender1"),
+            mrsRadioBtn = new ElementLocator(Locator.Id, "id_gender2"),
             customerFirstNameInput = new ElementLocator(Locator.Id, "customer_firstname"),
             customerLastNameInput = new ElementLocator(Locator.Id, "customer_lastname"),
             passwordInput = new ElementLocator(Locator.Id, "passwd"),
-            //dayDropdown = new ElementLocator(Locator.Id, "days"),
+            dayDropdown = new ElementLocator(Locator.Id, "days"),
             //monthDropdown = new ElementLocator(Locator.Id, "months"),
             //yearDropdown = new ElementLocator(Locator.Id, "years"),
             //newsletterCheckbox = new ElementLocator(Locator.Id, "newsletter"),
@@ -32,9 +32,9 @@ namespace StoreTests.PageObjects
             addressAliasInput = new ElementLocator(Locator.Id, "alias"),
             registerBtn = new ElementLocator(Locator.Id, "submitAccount");
 
-        private IWebElement mrRadioBtn => Driver.FindElement(By.Id("id_gender1"));
-        private IWebElement mrsRadioBtn => Driver.FindElement(By.Id("id_gender2"));
-        private IWebElement dayDropdown => Driver.FindElement(By.Id("days"));
+        // private IWebElement mrRadioBtn => Driver.FindElement(By.Id("id_gender1"));
+        // private IWebElement mrsRadioBtn => Driver.FindElement(By.Id("id_gender2"));
+        // private IWebElement dayDropdown => Driver.FindElement(By.Id("days"));
         private IWebElement monthDropdown => Driver.FindElement(By.Id("months"));
         private IWebElement yearDropdown => Driver.FindElement(By.Id("years"));
         private IWebElement newsletterCheckbox => Driver.FindElement(By.Id("newsletter"));
@@ -46,34 +46,38 @@ namespace StoreTests.PageObjects
         }
 
         public void SelectMrGender()
-        { 
-            Checkbox checkbox = new Checkbox(mrRadioBtn);
+        {
+            Checkbox checkbox = Driver.GetElement<Checkbox>(mrRadioBtn, e => e.Enabled);
             checkbox.TickCheckbox();
         }
+
         public void SelectMrsGender()
         {
-            Checkbox checkbox = new Checkbox(mrsRadioBtn);
+            Checkbox checkbox = Driver.GetElement<Checkbox>(mrsRadioBtn);
             checkbox.TickCheckbox();
         }
+
         public void SetCustomerFirstName(string firstName)
         {
             Driver.GetElement(customerFirstNameInput).SendKeys(firstName);
         }
+
         public void SetCustomerLastName(string lastName)
         {
             Driver.GetElement(customerLastNameInput).SendKeys(lastName);
         }
+
         public void SetPassword(string password)
         {
             Driver.GetElement(passwordInput).SendKeys(password);
         }
+
         public void SetDayOfBirth(int day)
         {
-            //Select select = Driver.GetElement<Select>(dayDropdown);
-            //select.SelectByIndex(day);
-            SelectElement select = new SelectElement(dayDropdown);
+            Select select = Driver.GetElement<Select>(dayDropdown, e => e.Enabled);
             select.SelectByIndex(day);
         }
+
         public void SetMonthOfBirth(int month)
         {
             //Select select = Driver.GetElement<Select>monthDropdown, 2);
@@ -81,6 +85,7 @@ namespace StoreTests.PageObjects
             SelectElement select = new SelectElement(monthDropdown);
             select.SelectByIndex(month);
         }
+
         public void SetYearOfBirth(int year)
         {
             //Select select = Driver.GetElement<Select>yearDropdown, 2);
@@ -88,32 +93,39 @@ namespace StoreTests.PageObjects
             SelectElement select = new SelectElement(yearDropdown);
             select.SelectByIndex(year);
         }
+
         public void SelectNewsletterCheckbox()
         {
             Checkbox checkbox = new Checkbox(newsletterCheckbox);
             checkbox.TickCheckbox();
         }
+
         public void SelectSpecialOffersCheckbox()
         {
             Checkbox checkbox = new Checkbox(specialOffersCheckbox);
             checkbox.TickCheckbox();
         } 
+
         public void SetCompany(string company)
         {
             Driver.GetElement(companyInput).SendKeys(company);
         }
+
         public void SetAddress(string address)
         {
             Driver.GetElement(addressInput).SendKeys(address);
         }
+
         public void SetAddressLine2(string addressLine2)
         {
             Driver.GetElement(addressLine2Input).SendKeys(addressLine2);
         }
+
         public void SetCity(string city)
         {
             Driver.GetElement(cityInput).SendKeys(city);
         }
+
         public void SetState(int state)
         {
             //Select select = Driver.GetElement<Select>stateDropdown, 2);
@@ -121,30 +133,37 @@ namespace StoreTests.PageObjects
             SelectElement select = new SelectElement(stateDropdown);
             select.SelectByIndex(state);
         }
+
         public void SetPostalCode(string postal)
         {
             Driver.GetElement(postalCodeInput).SendKeys(postal);
         }
+
         public void SetAdditionalInformation(string info)
         {
             Driver.GetElement(additionalInformationTextarea).SendKeys(info);
         }
+
         public void SetHomePhone(string phone)
         {
             Driver.GetElement(homePhoneInput).SendKeys(phone);
         }
+
         public void SetMobilePhone(string phone)
         {
             Driver.GetElement(mobilePhoneInput).SendKeys(phone);
         }
+
         public void SetAddressAlias(string alias)
         {
             Driver.GetElement(addressAliasInput).SendKeys(alias);
         }
+
         public void ClickRegisterBtn()
         {
             Driver.GetElement(registerBtn).Click();
         } 
+
         public void FillInAddressInformation(
             string company,
             string address,

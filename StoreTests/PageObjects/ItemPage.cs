@@ -14,47 +14,62 @@ namespace StoreTests.PageObjects
             quantityInput = new ElementLocator(Locator.Id, "quantity_wanted"),
             oldPriceInfo = new ElementLocator(Locator.Id, "old_price_display"),
             reductionPercentInfo = new ElementLocator(Locator.Id, "reduction_percent_display"),
-            priceInfo = new ElementLocator(Locator.Id, "our_price_display");
+            priceInfo = new ElementLocator(Locator.Id, "our_price_display"),
+            colorSelector = new ElementLocator(Locator.CssSelector, "a[title='{0}'");
+
         private IWebElement sizeDropdown => Driver.FindElement(By.Id("group_1"));
 
         public ItemPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
-        public void CheckOldPrice(string expectedOldPrice)
+        public ItemPage CheckOldPrice(string expectedOldPrice)
         {
             var oldPrice = Driver.GetElement(oldPriceInfo).Text;
             Assert.AreEqual(expectedOldPrice, oldPrice);
+            return this;
         }
-        public void CheckReductionPercent(string expectedReductionPercent)
+
+        public ItemPage CheckReductionPercent(string expectedReductionPercent)
         {
             var reductionPercent = Driver.GetElement(reductionPercentInfo).Text;
             Assert.AreEqual(expectedReductionPercent, reductionPercent);
+            return this;
         }
+
         public void CheckNewPrice(string expectedNewPrice)
         {
             var price = Driver.GetElement(priceInfo).Text.Split('$');
             var priceWithoutCurrency = price[1];
             Assert.AreEqual(expectedNewPrice, priceWithoutCurrency);
         }
-        public void ClickAddToCart()
+
+        public CartPopupPage ClickAddToCart()
         {
             Driver.GetElement(addToCartBtn).Click();
+            return new CartPopupPage(DriverContext);
         }
-        public void ChangeQuantity(string quantity)
+
+        public ItemPage ChangeQuantity(string quantity)
         {
             Driver.GetElement(quantityInput).Clear();
             Driver.GetElement(quantityInput).SendKeys(quantity);
+            return this;
         }
-        public void ChangeSize(string size)
+
+        public ItemPage ChangeSize(string size)
         {
             SelectElement select = new SelectElement(sizeDropdown);
             select.SelectByText(size);
+            return this;
         }
-        public void ChangeColor(string color)
+
+        public ItemPage ChangeColor(string color)
         {
-            Driver.GetElement(new ElementLocator(Locator.CssSelector, $"a[title = '{color}'")).Click();
+            Driver.GetElement(colorSelector.Format(color)).Click();
+            return this;
         }
+
         public double GetPrice()
         {
             var price = Driver.GetElement(priceInfo).Text.Split('$');

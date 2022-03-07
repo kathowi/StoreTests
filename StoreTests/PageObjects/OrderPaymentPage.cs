@@ -24,14 +24,17 @@ namespace StoreTests.PageObjects
 
             Assert.AreEqual(expectedTotalPrice, actualTotalPriceAsNumber);
         }
+
         public void ClickPayByCheck()
         {
             Driver.GetElement(payByCheckBtn).Click();
         }
+
         public void ClickConfirmMyOrder()
         {
             Driver.GetElement(confirmOrderBtn).Click();
         }
+
         public void CheckIfSuccessMessageIsVisible(string expectedMessage)
         {
             var actualMessage = Driver.GetElement(successOrderMessage).Text;

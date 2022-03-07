@@ -8,6 +8,7 @@ namespace StoreTests.DataDriven{
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "wrongEmail", new[] { "wrongEmail", "errorEmailMessage"}, "wrongEmail"); }
         }
+
         public static IEnumerable WrongPassword
         {
             get { return DataDrivenHelper.ReadDataDriveFile(ProjectBaseConfiguration.DataDrivenFile, "wrongPassword", new[] { "wrongPassword", "errorPasswordMessage" }, "wrongPassword"); }

@@ -18,6 +18,7 @@ namespace StoreTests.PageObjects
         {
             Driver.GetElement(termsOfServiceCheckbox).Click();
         }
+
         public void ClickProceedToCheckout()
         {
             Driver.GetElement(proceedToCheckoutBtn).Click();
