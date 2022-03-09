@@ -27,8 +27,7 @@ namespace StoreTests
 
         public void OpenSignInPage()
         {
-            var signInPage = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-            Driver.NavigateTo(new Uri(signInPage));
+            Driver.NavigateTo(new Uri(Url.SignIn));
         }
 
         public string GetTimestamp()

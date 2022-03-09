@@ -40,6 +40,7 @@
     <Compile Include="PageObjects\BasePage.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Tests\SignInTests.cs" />
+    <Compile Include="Url.cs" />
 	</ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />

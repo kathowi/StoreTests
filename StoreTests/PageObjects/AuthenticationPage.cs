@@ -81,7 +81,7 @@ namespace StoreTests.PageObjects
 
         public void LogOut()
         {
-            Driver.Navigate().GoToUrl("http://automationpractice.com/index.php?mylogout=");
+            Driver.Navigate().GoToUrl(Url.LogOut);
         }
     }
 }

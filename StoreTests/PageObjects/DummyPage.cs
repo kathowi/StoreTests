@@ -27,26 +27,22 @@ namespace StoreTests.PageObjects
 
         public void OpenDragAndDropPage()
         {
-            var dummyDragAndDropUrl = "https://the-internet.herokuapp.com/drag_and_drop";
-            Driver.NavigateTo(new Uri(dummyDragAndDropUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDragAndDropUrl));
         }
 
         public void OpenWindowsPage()
         {
-            var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
-            Driver.NavigateTo(new Uri(dummyWindowsUrl));
+            Driver.NavigateTo(new Uri(Url.DummyWindowsUrl));
         }
 
         public void OpenDynamicLoadingPage1()
         {
-            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/1";
-            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDynamicLoadingUrl1));
         }
 
         public void OpenDynamicLoadingPage2()
         {
-            var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/2";
-            Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
+            Driver.NavigateTo(new Uri(Url.DummyDynamicLoadingUrl2));
         }
 
         public void OpenNewTab()
