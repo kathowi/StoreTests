@@ -17,6 +17,7 @@ namespace StoreTests.PageObjects
         {
             Driver.GetElement(categories).Click();
         }
+
         public void GoToCategory(string categoryName)
         {
             var category = new ElementLocator(Locator.CssSelector, $"a[title='{categoryName}']");

@@ -39,93 +39,114 @@ namespace StoreTests.PageObjects
             Checkbox checkbox = Driver.GetElement<Checkbox>(mrRadioBtn, e => e.Enabled);
             checkbox.TickCheckbox();
         }
+
         public void SelectMrsGender()
         {
             Checkbox checkbox = Driver.GetElement<Checkbox>(mrsRadioBtn, e => e.Enabled);
             checkbox.TickCheckbox();
         }
+
         public void SetCustomerFirstName(string firstName)
         {
             Driver.GetElement(customerFirstNameInput).SendKeys(firstName);
         }
+
         public void SetCustomerLastName(string lastName)
         {
             Driver.GetElement(customerLastNameInput).SendKeys(lastName);
         }
+
         public void SetPassword(string password)
         {
             Driver.GetElement(passwordInput).SendKeys(password);
         }
+
         public void SetDayOfBirth(int day)
         {
             Select select = Driver.GetElement<Select>(dayDropdown, e => e.Enabled);
             select.SelectByIndex(day);
         }
+
         public void SetMonthOfBirth(int month)
         {
             Select select = Driver.GetElement<Select>(monthDropdown, e => e.Enabled);
             select.SelectByIndex(month);
         }
+
         public void SetYearOfBirth(int year)
         {
             Select select = Driver.GetElement<Select>(yearDropdown, e => e.Enabled);
             select.SelectByIndex(year);
         }
+
         public void SelectNewsletterCheckbox()
         {
             Checkbox checkbox = Driver.GetElement<Checkbox>(newsletterCheckbox, e => e.Enabled);
             checkbox.TickCheckbox();
         }
+
         public void SelectSpecialOffersCheckbox()
         {
             Checkbox checkbox = Driver.GetElement<Checkbox>(specialOffersCheckbox, e => e.Enabled);
             checkbox.TickCheckbox();
         } 
+
         public void SetCompany(string company)
         {
             Driver.GetElement(companyInput).SendKeys(company);
         }
+
         public void SetAddress(string address)
         {
             Driver.GetElement(addressInput).SendKeys(address);
         }
+
         public void SetAddressLine2(string addressLine2)
         {
             Driver.GetElement(addressLine2Input).SendKeys(addressLine2);
         }
+
         public void SetCity(string city)
         {
             Driver.GetElement(cityInput).SendKeys(city);
         }
+
         public void SetState(int state)
         {
             Select select = Driver.GetElement<Select>(stateDropdown, e => e.Enabled);
             select.SelectByIndex(state);
         }
+
         public void SetPostalCode(string postal)
         {
             Driver.GetElement(postalCodeInput).SendKeys(postal);
         }
+
         public void SetAdditionalInformation(string info)
         {
             Driver.GetElement(additionalInformationTextarea).SendKeys(info);
         }
+
         public void SetHomePhone(string phone)
         {
             Driver.GetElement(homePhoneInput).SendKeys(phone);
         }
+
         public void SetMobilePhone(string phone)
         {
             Driver.GetElement(mobilePhoneInput).SendKeys(phone);
         }
+
         public void SetAddressAlias(string alias)
         {
             Driver.GetElement(addressAliasInput).SendKeys(alias);
         }
+
         public void ClickRegisterBtn()
         {
             Driver.GetElement(registerBtn).Click();
         } 
+
         public void FillInAddressInformation(
             string company,
             string address,

@@ -30,25 +30,30 @@ namespace StoreTests.PageObjects
             var dummyDragAndDropUrl = "https://the-internet.herokuapp.com/drag_and_drop";
             Driver.NavigateTo(new Uri(dummyDragAndDropUrl));
         }
+
         public void OpenWindowsPage()
         {
             var dummyWindowsUrl = "https://the-internet.herokuapp.com/windows";
             Driver.NavigateTo(new Uri(dummyWindowsUrl));
         }
+
         public void OpenDynamicLoadingPage1()
         {
             var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/1";
             Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
         }
+
         public void OpenDynamicLoadingPage2()
         {
             var dummyDynamicLoadingUrl = "https://the-internet.herokuapp.com/dynamic_loading/2";
             Driver.NavigateTo(new Uri(dummyDynamicLoadingUrl));
         }
+
         public void OpenNewTab()
         {
             Driver.GetElement(clickHereLink).Click();
         }
+
         public void DragBoxAAndDropToBoxB()
         {
             var element = Driver.GetElement(boxA);
@@ -56,19 +61,23 @@ namespace StoreTests.PageObjects
 
             Driver.DragAndDropJs(element, destination);
         }
+
         public void SwitchToNewTab()
         {
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
         }
+
         public void SwitchToPreviousTab()
         {
             Driver.SwitchTo().Window(Driver.WindowHandles.First());
         }
+
         public void CheckIfUserIsSwitchedToChosenTab(string expectedPageTitle)
         {
             var actualPageTitle = Driver.Title;
             Assert.AreEqual(expectedPageTitle,actualPageTitle);
         }
+
         public void CheckIfBoxAWasSwitchedWithBoxB()
         {
             var expectedHeaderOfBoxA = "B";
@@ -82,10 +91,12 @@ namespace StoreTests.PageObjects
                 Assert.AreEqual(expectedHeaderOfBoxB, actualHeaderOfBoxB);
             });
         }
+
         public void ClickStartBtn()
         {
             Driver.GetElement(startBtn).Click();
         }
+
         public void CheckIfMessageIsVisible(string expectedMessage)
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));

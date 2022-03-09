@@ -25,16 +25,19 @@ namespace StoreTests.PageObjects
         {
             Driver.IsElementPresent(cartPopup, 4);
         }
+
         public void CheckIfSuccessMessageIsVisible(string expectedMessage)
         {
             var actualMessage = Driver.GetElement(productAddedToCartMessage).Text;
             Assert.AreEqual(expectedMessage, actualMessage);
         }
+
         public void CheckIfSelectedQuantityIsVisible(string expectedQuantity)
         {
             var actualQuantity = Driver.GetElement(quantityInfo).Text;
             Assert.AreEqual(expectedQuantity, actualQuantity);
         }
+
         public void CheckIfSelectedColorAndSizeAreVisible(string expectedSize, string expectedColor)
         {
             var actualAttributes = Driver.GetElement(attributesInfo).Text;
@@ -45,6 +48,7 @@ namespace StoreTests.PageObjects
                 Assert.IsTrue(actualAttributes.Contains(expectedColor));
             });
         }
+
         public void CheckIfPriceIsProperlyCalculatedWithGivenQuantity(string quantity)
         {
             var item = new ItemPage(DriverContext);
@@ -56,10 +60,12 @@ namespace StoreTests.PageObjects
 
             Assert.AreEqual(expectedTotalProductPrice, actualTotalProductPriceAsNumber);
         }
+
         public void ClickContinueShopping()
         {
             Driver.GetElement(continueShoppingBtn).Click();
         }
+
         public void ClickProceedToCheckout()
         {
             Driver.GetElement(proceedCheckoutBtn).Click();
