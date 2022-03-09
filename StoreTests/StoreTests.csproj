@@ -16,7 +16,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
     <PackageReference Include="OcarambaLite" Version="4.0.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.30.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="96.0.4664.4500" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.10200" />
 	</ItemGroup>
 	<ItemGroup>
     <Compile Include="DataDriven\DataDrivenHelper.cs" />
