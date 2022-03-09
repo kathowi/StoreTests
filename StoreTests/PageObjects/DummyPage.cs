@@ -11,7 +11,6 @@ namespace StoreTests.PageObjects
 {
     public class DummyPage : BasePage
     {
-
         private readonly ElementLocator
             boxA = new ElementLocator(Locator.Id, "column-a"),
             boxB = new ElementLocator(Locator.Id, "column-b"),

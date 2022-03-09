@@ -1,8 +1,6 @@
 ﻿using Ocaramba;
 using Ocaramba.Extensions;
 using Ocaramba.Types;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using Ocaramba.WebElements;
 
 namespace StoreTests.PageObjects
@@ -10,21 +8,21 @@ namespace StoreTests.PageObjects
     public class RegistrationPage : BasePage
     {
         private readonly ElementLocator
-            //mrRadioBtn = new ElementLocator(Locator.Id, "id_gender1"),
-            //mrsRadioBtn = new ElementLocator(Locator.Id, "id_gender2"),
+            mrRadioBtn = new ElementLocator(Locator.Id, "id_gender1"),
+            mrsRadioBtn = new ElementLocator(Locator.Id, "id_gender2"),
             customerFirstNameInput = new ElementLocator(Locator.Id, "customer_firstname"),
             customerLastNameInput = new ElementLocator(Locator.Id, "customer_lastname"),
             passwordInput = new ElementLocator(Locator.Id, "passwd"),
-            //dayDropdown = new ElementLocator(Locator.Id, "days"),
-            //monthDropdown = new ElementLocator(Locator.Id, "months"),
-            //yearDropdown = new ElementLocator(Locator.Id, "years"),
-            //newsletterCheckbox = new ElementLocator(Locator.Id, "newsletter"),
-            //specialOffersCheckbox = new ElementLocator(Locator.Id, "optin"),
+            dayDropdown = new ElementLocator(Locator.Id, "days"),
+            monthDropdown = new ElementLocator(Locator.Id, "months"),
+            yearDropdown = new ElementLocator(Locator.Id, "years"),
+            newsletterCheckbox = new ElementLocator(Locator.Id, "newsletter"),
+            specialOffersCheckbox = new ElementLocator(Locator.Id, "optin"),
             companyInput = new ElementLocator(Locator.Id, "company"),
             addressInput = new ElementLocator(Locator.Id, "address1"),
             addressLine2Input = new ElementLocator(Locator.Id, "address2"),
             cityInput = new ElementLocator(Locator.Id, "city"),
-            //stateDropdown = new ElementLocator(Locator.Id, "id_state"),
+            stateDropdown = new ElementLocator(Locator.Id, "id_state"),
             postalCodeInput = new ElementLocator(Locator.Id, "postcode"),
             additionalInformationTextarea = new ElementLocator(Locator.Id, "other"),
             homePhoneInput = new ElementLocator(Locator.Id, "phone"),
@@ -32,27 +30,18 @@ namespace StoreTests.PageObjects
             addressAliasInput = new ElementLocator(Locator.Id, "alias"),
             registerBtn = new ElementLocator(Locator.Id, "submitAccount");
 
-        private IWebElement mrRadioBtn => Driver.FindElement(By.Id("id_gender1"));
-        private IWebElement mrsRadioBtn => Driver.FindElement(By.Id("id_gender2"));
-        private IWebElement dayDropdown => Driver.FindElement(By.Id("days"));
-        private IWebElement monthDropdown => Driver.FindElement(By.Id("months"));
-        private IWebElement yearDropdown => Driver.FindElement(By.Id("years"));
-        private IWebElement newsletterCheckbox => Driver.FindElement(By.Id("newsletter"));
-        private IWebElement specialOffersCheckbox => Driver.FindElement(By.Id("optin"));
-        private IWebElement stateDropdown => Driver.FindElement(By.Id("id_state"));
-
         public RegistrationPage(DriverContext driverContext) : base(driverContext)
         {
         }
 
         public void SelectMrGender()
-        { 
-            Checkbox checkbox = new Checkbox(mrRadioBtn);
+        {
+            Checkbox checkbox = Driver.GetElement<Checkbox>(mrRadioBtn, e => e.Enabled);
             checkbox.TickCheckbox();
         }
         public void SelectMrsGender()
         {
-            Checkbox checkbox = new Checkbox(mrsRadioBtn);
+            Checkbox checkbox = Driver.GetElement<Checkbox>(mrsRadioBtn, e => e.Enabled);
             checkbox.TickCheckbox();
         }
         public void SetCustomerFirstName(string firstName)
@@ -69,33 +58,27 @@ namespace StoreTests.PageObjects
         }
         public void SetDayOfBirth(int day)
         {
-            //Select select = Driver.GetElement<Select>(dayDropdown);
-            //select.SelectByIndex(day);
-            SelectElement select = new SelectElement(dayDropdown);
+            Select select = Driver.GetElement<Select>(dayDropdown, e => e.Enabled);
             select.SelectByIndex(day);
         }
         public void SetMonthOfBirth(int month)
         {
-            //Select select = Driver.GetElement<Select>monthDropdown, 2);
-            //select.SelectByIndex(month, 2);
-            SelectElement select = new SelectElement(monthDropdown);
+            Select select = Driver.GetElement<Select>(monthDropdown, e => e.Enabled);
             select.SelectByIndex(month);
         }
         public void SetYearOfBirth(int year)
         {
-            //Select select = Driver.GetElement<Select>yearDropdown, 2);
-            //select.SelectByIndex(year, 2);
-            SelectElement select = new SelectElement(yearDropdown);
+            Select select = Driver.GetElement<Select>(yearDropdown, e => e.Enabled);
             select.SelectByIndex(year);
         }
         public void SelectNewsletterCheckbox()
         {
-            Checkbox checkbox = new Checkbox(newsletterCheckbox);
+            Checkbox checkbox = Driver.GetElement<Checkbox>(newsletterCheckbox, e => e.Enabled);
             checkbox.TickCheckbox();
         }
         public void SelectSpecialOffersCheckbox()
         {
-            Checkbox checkbox = new Checkbox(specialOffersCheckbox);
+            Checkbox checkbox = Driver.GetElement<Checkbox>(specialOffersCheckbox, e => e.Enabled);
             checkbox.TickCheckbox();
         } 
         public void SetCompany(string company)
@@ -116,9 +99,7 @@ namespace StoreTests.PageObjects
         }
         public void SetState(int state)
         {
-            //Select select = Driver.GetElement<Select>stateDropdown, 2);
-            //select.SelectByIndex(state, 2);
-            SelectElement select = new SelectElement(stateDropdown);
+            Select select = Driver.GetElement<Select>(stateDropdown, e => e.Enabled);
             select.SelectByIndex(state);
         }
         public void SetPostalCode(string postal)

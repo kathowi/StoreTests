@@ -2,8 +2,7 @@
 using Ocaramba;
 using Ocaramba.Extensions;
 using Ocaramba.Types;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+using Ocaramba.WebElements;
 
 namespace StoreTests.PageObjects
 {
@@ -12,10 +11,10 @@ namespace StoreTests.PageObjects
         private readonly ElementLocator
             addToCartBtn = new ElementLocator(Locator.XPath, "//span[contains(text(),'Add to cart')]"),
             quantityInput = new ElementLocator(Locator.Id, "quantity_wanted"),
+            sizeDropdown = new ElementLocator(Locator.Id, "group_1"),
             oldPriceInfo = new ElementLocator(Locator.Id, "old_price_display"),
             reductionPercentInfo = new ElementLocator(Locator.Id, "reduction_percent_display"),
             priceInfo = new ElementLocator(Locator.Id, "our_price_display");
-        private IWebElement sizeDropdown => Driver.FindElement(By.Id("group_1"));
 
         public ItemPage(DriverContext driverContext) : base(driverContext)
         {
@@ -48,7 +47,7 @@ namespace StoreTests.PageObjects
         }
         public void ChangeSize(string size)
         {
-            SelectElement select = new SelectElement(sizeDropdown);
+            Select select = Driver.GetElement<Select>(sizeDropdown, e => e.Enabled);
             select.SelectByText(size);
         }
         public void ChangeColor(string color)
